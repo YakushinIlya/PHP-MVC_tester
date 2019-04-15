@@ -1,0 +1,1 @@
+Hello world! I am testing text of patcher file.

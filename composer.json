@@ -1,0 +1,25 @@
+{
+    "name": "mvcproject/mvctest",
+    "description": "Testing project mvc",
+    "type": "project",
+    "license": "mit",
+    "authors": [
+        {
+            "name": "Yakushin Ilya",
+            "email": "yakushinilya74@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+    },
+    "autoload": {
+    	"psr-4": {
+    		"App\\": "app"
+    	},
+        "files": [
+            "resource/config.php",
+            "app/system/router.php",
+            "resource/rout.php"
+        ]
+    }
+}
