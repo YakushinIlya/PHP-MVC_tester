@@ -50,7 +50,7 @@ class View
      * */
     public static function patch(string $patch = null, array $dann = [])
     {
-        $res = self::getContents("http://{$_SERVER['HTTP_HOST']}/resource/view/patch/{$patch}.php", $dann);
+        $res = self::getContents("http://{$_SERVER['HTTP_HOST']}/resource/View/patch/{$patch}.php", $dann);
         return $res;
     }
     

@@ -17,8 +17,8 @@
     		"App\\": "app"
     	},
         "files": [
-            "app/system/config.php",
-            "app/system/router.php"
+            "app/system/Config.php",
+            "app/system/Router.php"
         ]
     }
 }
