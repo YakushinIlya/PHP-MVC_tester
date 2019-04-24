@@ -12,6 +12,8 @@ namespace App\Controller;
 
 use App\system\Controller;
 use App\system\View;
+use App\Model\User;
+use App\system\HTTP;
 
 class ControllerUser extends Controller
 {
@@ -19,37 +21,61 @@ class ControllerUser extends Controller
      * @var string Название HTML шаблона (resource/Wiew/template)
      * */
     public $template = 'mytemplate';
-    
-    /**
-     * @method ActionIndex
-     * @param array Параметры передаваемые в адресной строке после основного адреса (user/{param})
-     * @return string
-     * */
-    public function ActionIndex(array $patch = null)
-    {
-        echo 'Класс юзера выводит имя юзера: ' . $patch[0] . $patch[1];
-    }
 
     /**
-     * @method ActionUsers
-     * @param array Параметры передаваемые в адресной строке после основного адреса (user/{param})
-     * @return string
-     * */
-    public function ActionUsers(array $get = null)
-    {
-        echo 'users_dann';
-    }
-
-    /**
-     * @method ActionUserst
+     * @method ActionAuth
+     *
+     * Метод авторизации пользователей, выводит страницу с формой авторизации.
+     *
      * @param array Параметры передаваемые в адресной строке после основного адреса (user/{param})
      * @return text/html
      * */
-    public function ActionUserst()
+    public function ActionAuth()
     {
         $data = [
-            'data' => 'testing'
+            'title' => 'Авторизация',
+            'alert' => '',
         ];
-        return View::render($this->template, $data);
+        if (isset($_POST['passwords'])) {
+            $data['alert'] = User::auth($_POST['emails'], $_POST['passwords']);
+        }
+        
+        return View::render($this->template, $data, ['content' => 'user/auth']);
+    }
+
+    /**
+     * @method ActionReg
+     *
+     * Метод регистрации пользователей, выводит страницу с формой регистрации.
+     *
+     * @param array Параметры передаваемые в адресной строке после основного адреса (user/{param})
+     * @return text/html
+     * */
+    public function ActionReg()
+    {
+        $data = [
+            'title' => 'Регистрация',
+            'alert' => '',
+        ];
+        if (isset($_POST['passwords'])) {
+            $data['alert'] = User::reg($_POST['names'], $_POST['emails'], $_POST['passwords']);
+        }
+        
+        return View::render($this->template, $data, ['content' => 'user/reg']);
+    }
+
+    /**
+     * @method ActionOut
+     *
+     * Метод регистрации пользователей, выводит страницу с формой регистрации.
+     *
+     * @param array Параметры передаваемые в адресной строке после основного адреса (user/{param})
+     * @return text/html
+     * */
+    public function ActionOut()
+    {
+        HTTP::cookieOut('userAuth');
+        HTTP::cookieOut('userDann');
+        HTTP::redirect('/');
     }
 }

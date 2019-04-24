@@ -28,7 +28,8 @@ class DB
     {
         try {
             $this->db = new PDO(
-                self::$DB_TYPE . ':host=' . self::$DB_HOST . ';dbname=' .
+                self::$DB_TYPE . ':host=' .
+                self::$DB_HOST . ';dbname=' .
                 self::$DB_NAME,
                 self::$DB_USER,
                 self::$DB_PASS,
@@ -37,6 +38,11 @@ class DB
         } catch (PDOException $e) {
             exit("Не удалось подключиться к БД: " . $e->getMessage());
         }
+    }
+
+    public function query(string $sql = null)
+    {
+        return $this->db->query($sql);
     }
 
     /**

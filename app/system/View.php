@@ -41,6 +41,18 @@ class View
         }
         require 'resource/View/template/' . $template . '.php';
     }
+
+    /**
+     * @method patch
+     *
+     * @param  string $patch, array $dann
+     * @return text/html
+     * */
+    public static function patch(string $patch = null, array $dann = [])
+    {
+        $res = self::getContents("http://{$_SERVER['HTTP_HOST']}/resource/view/patch/{$patch}.php", $dann);
+        return $res;
+    }
     
     /**
      * @method getContents

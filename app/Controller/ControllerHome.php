@@ -13,6 +13,7 @@ namespace App\Controller;
 use App\system\Controller;
 use App\system\View;
 use App\system\DB;
+use App\Model\Nav;
 
 class ControllerHome extends Controller
 {
@@ -33,7 +34,27 @@ class ControllerHome extends Controller
      * */
     public function ActionIndex()
     {
-        echo 'index';
+        $data = [
+            'title' => 'Заголовок на главной',
+            'navigation' => Nav::top_menu(),
+            'navauth' => Nav::auth_menu(),
+            'content' => '<h1>'.base64_decode($_COOKIE['userDann']).'</h1>'
+            ];
+        return View::render($this->template, $data);
+    }
+
+    /**
+     * @method ActionIndex
+     *
+     * @return text/html
+     * */
+    public function ActionCompany()
+    {
+        $data = [
+            'title' => 'О компании',
+            'navigation' => Nav::top_menu(),
+            ];
+        return View::render($this->template, $data);
     }
 
     /**
@@ -47,7 +68,7 @@ class ControllerHome extends Controller
         $db = DB::getIns();
         $res = $db->queryAssoc('select * from users');
         $data = [
-            'data' => $res[0]['email']
+            'title' => $res[0]['email']
             ];
 
         return View::render($this->template, $data);
