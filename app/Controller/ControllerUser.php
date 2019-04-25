@@ -14,6 +14,7 @@ use App\system\Controller;
 use App\system\View;
 use App\Model\User;
 use App\system\HTTP;
+use App\Model\Nav;
 
 class ControllerUser extends Controller
 {
@@ -35,6 +36,8 @@ class ControllerUser extends Controller
         $data = [
             'title' => 'Авторизация',
             'alert' => '',
+            'navigation' => Nav::top_menu(),
+            'navauth' => Nav::auth_menu(),
         ];
         if (isset($_POST['passwords'])) {
             $data['alert'] = User::auth($_POST['emails'], $_POST['passwords']);
@@ -56,6 +59,8 @@ class ControllerUser extends Controller
         $data = [
             'title' => 'Регистрация',
             'alert' => '',
+            'navigation' => Nav::top_menu(),
+            'navauth' => Nav::auth_menu(),
         ];
         if (isset($_POST['passwords'])) {
             $data['alert'] = User::reg($_POST['names'], $_POST['emails'], $_POST['passwords']);

@@ -1,3 +1,3 @@
-<div class="alert alert-<?=$_POST['type']?>" role="alert">
-  <?=$_POST['message']?>
+<div class="alert alert-<?=$type?>" role="alert">
+  <?=$message?>
 </div>

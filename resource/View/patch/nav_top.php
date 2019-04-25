@@ -1,4 +1,4 @@
 <li class="nav-item">
-<a href="<?=$_POST['url']?>" class="<?=$_POST['class']?>"><?=$_POST['head']?></a>
+<a href="<?=$url?>" class="<?=$class?>"><?=$head?></a>
 </li>
 

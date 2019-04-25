@@ -32,14 +32,14 @@ class View
     {
         if (is_array(($dann))) {
             foreach ($dann as $key => $val) {
-                $dann[$key] = self::getContents("http://{$_SERVER['HTTP_HOST']}/resource/View/patch/{$val}.php");
+                $dann[$key] = self::getContents("resource/View/patch/{$val}.php");
             }
             $contents = array_merge($contents, $dann);
         }
         if (!empty($contents)) {
             extract($contents);
         }
-        require 'resource/View/template/' . $template . '.php';
+        require "resource/View/template/{$template}.php";
     }
 
     /**
@@ -50,7 +50,7 @@ class View
      * */
     public static function patch(string $patch = null, array $dann = [])
     {
-        $res = self::getContents("http://{$_SERVER['HTTP_HOST']}/resource/View/patch/{$patch}.php", $dann);
+        $res = self::getContents("resource/View/patch/{$patch}.php", $dann);
         return $res;
     }
     
@@ -64,19 +64,14 @@ class View
      * @param  string $url, array $dann
      * @return Возвращает text/html
      * */
-    public static function getContents(string $url, array $dann = [])
+    public static function getContents(string $url_patch, array $dann = [])
     {
-        $ch = curl_init();
-        
-        curl_setopt($ch, CURLOPT_HEADER, 0);
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $dann);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        
-        $data = curl_exec($ch);
-        curl_close($ch);
+        ob_start();
+        extract($dann);
+        require $url_patch;
+        $content = ob_get_contents();
+        $contrnt = ob_get_clean();
 
-        return $data;
+        return $content;
     }
 }
