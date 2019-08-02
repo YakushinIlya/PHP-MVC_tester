@@ -19,7 +19,7 @@ use Exception;
 class User
 {
     /**
-     * @var string Сообщения об ошибки валидации
+     * @var string Сообщения об ошибке валидации
      * */
     public static $mess = '';
 
